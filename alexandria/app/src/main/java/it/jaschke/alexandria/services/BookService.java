@@ -64,7 +64,7 @@ public class BookService extends IntentService {
      * parameters.
      */
     private void deleteBook(String ean) {
-        if(ean!=null) {
+        if(ean != null) {
             getContentResolver().delete(AlexandriaContract.BookEntry.buildBookUri(Long.parseLong(ean)), null, null);
         }
     }
@@ -75,7 +75,7 @@ public class BookService extends IntentService {
      */
     private void fetchBook(String ean) {
 
-        if(ean.length()!=13){
+        if(ean.length() != 13){
             return;
         }
 
@@ -87,17 +87,17 @@ public class BookService extends IntentService {
                 null  // sort order
         );
 
-        if(bookEntry.getCount()>0){
+        if(bookEntry.getCount() > 0){
             bookEntry.close();
             return;
         }
 
         bookEntry.close();
 
-        if (!isNetworkAvailable(this))
+        if (!isNetworkAvailable(getApplicationContext()))
         {
             Intent msgIntent = new Intent(MainActivity.MESSAGE_EVENT);
-            msgIntent.putExtra(MainActivity.MESSAGE_KEY, "No network available");
+            msgIntent.putExtra(MainActivity.MESSAGE_KEY, getResources().getString(R.string.no_network_available));
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(msgIntent);
             return;
         }
@@ -223,7 +223,7 @@ public class BookService extends IntentService {
     }
 
     private void writeBackAuthors(String ean, JSONArray jsonArray) throws JSONException {
-        ContentValues values= new ContentValues();
+        ContentValues values = new ContentValues();
         for (int i = 0; i < jsonArray.length(); i++) {
             values.put(AlexandriaContract.AuthorEntry._ID, ean);
             values.put(AlexandriaContract.AuthorEntry.AUTHOR, jsonArray.getString(i));
@@ -233,7 +233,7 @@ public class BookService extends IntentService {
     }
 
     private void writeBackCategories(String ean, JSONArray jsonArray) throws JSONException {
-        ContentValues values= new ContentValues();
+        ContentValues values = new ContentValues();
         for (int i = 0; i < jsonArray.length(); i++) {
             values.put(AlexandriaContract.CategoryEntry._ID, ean);
             values.put(AlexandriaContract.CategoryEntry.CATEGORY, jsonArray.getString(i));

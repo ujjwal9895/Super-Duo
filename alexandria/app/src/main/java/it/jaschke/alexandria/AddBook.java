@@ -42,15 +42,13 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     private String mScanFormat = "Format:";
     private String mScanContents = "Contents:";
 
-
-
     public AddBook(){
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(ean!=null) {
+        if(ean != null) {
             outState.putString(EAN_CONTENT, ean.getText().toString());
         }
     }
@@ -74,12 +72,12 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
             @Override
             public void afterTextChanged(Editable s) {
-                String ean =s.toString();
+                String ean = s.toString();
                 //catch isbn10 numbers
-                if(ean.length()==10 && !ean.startsWith("978")){
-                    ean="978"+ean;
+                if(ean.length() == 10 && !ean.startsWith("978")){
+                    ean = "978" + ean;
                 }
-                if(ean.length()<13){
+                if(ean.length() < 13){
                     clearFields();
                     return;
                 }
@@ -158,12 +156,12 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
     @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if(ean.getText().length()==0){
+        if(ean.getText().length() == 0){
             return null;
         }
-        String eanStr= ean.getText().toString();
-        if(eanStr.length()==10 && !eanStr.startsWith("978")){
-            eanStr="978"+eanStr;
+        String eanStr = ean.getText().toString();
+        if(eanStr.length() == 10 && !eanStr.startsWith("978")){
+            eanStr = "978" + eanStr;
         }
         return new CursorLoader(
                 getActivity(),

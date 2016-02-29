@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         messageReciever = new MessageReciever();
         IntentFilter filter = new IntentFilter(MESSAGE_EVENT);
-        LocalBroadcastManager.getInstance(this).registerReceiver(messageReciever,filter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(messageReciever, filter);
 
         navigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -159,7 +159,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     private class MessageReciever extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getStringExtra(MESSAGE_KEY)!=null){
+            if(intent.getStringExtra(MESSAGE_KEY) != null){
                 Toast.makeText(MainActivity.this, intent.getStringExtra(MESSAGE_KEY), Toast.LENGTH_LONG).show();
             }
         }
@@ -186,8 +186,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        Log.v("On Activity Result", "Started");
-
         IntentResult intentResult = IntentIntegrator
                 .parseActivityResult(requestCode, resultCode, data);
 
@@ -196,11 +194,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             String barcodeNo = intentResult.getContents();
             EditText ean = (EditText) findViewById(R.id.ean);
 
-            Log.v("BarcodeNo", barcodeNo);
             if (barcodeNo != null && ean != null)
             {
                 ean.setText(barcodeNo);
-                Log.v("onActivityResult", "Successful");
             }
         }
         else {
