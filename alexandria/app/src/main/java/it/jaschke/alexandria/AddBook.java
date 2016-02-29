@@ -3,6 +3,7 @@ package it.jaschke.alexandria;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
@@ -96,13 +101,14 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
                 // Hint: Use a Try/Catch block to handle the Intent dispatch gracefully, if you
                 // are using an external app.
                 //when you're done, remove the toast below.
-                Context context = getActivity();
-                CharSequence text = "This button should let you scan a book for its barcode!";
-                int duration = Toast.LENGTH_SHORT;
+//                Context context = getActivity();
+//                CharSequence text = "This button should let you scan a book for its barcode!";
+//                int duration = Toast.LENGTH_SHORT;
+//
+//                Toast toast = Toast.makeText(context, text, duration);
+//                toast.show();
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
+                (new IntentIntegrator(getActivity())).initiateScan();
             }
         });
 
@@ -130,6 +136,20 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult intentResult = IntentIntegrator
+                .parseActivityResult(requestCode, resultCode, data);
+
+        if (intentResult != null)
+        {
+            String barcodeNo = intentResult.getContents();
+            if (barcodeNo != null)
+                ean.setText(barcodeNo);
+        }
     }
 
     private void restartLoader(){

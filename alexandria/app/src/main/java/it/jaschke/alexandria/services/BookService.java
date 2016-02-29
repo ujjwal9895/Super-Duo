@@ -2,8 +2,11 @@ package it.jaschke.alexandria.services;
 
 import android.app.IntentService;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -90,6 +93,14 @@ public class BookService extends IntentService {
         }
 
         bookEntry.close();
+
+        if (!isNetworkAvailable(this))
+        {
+            Intent msgIntent = new Intent(MainActivity.MESSAGE_EVENT);
+            msgIntent.putExtra(MainActivity.MESSAGE_KEY, "No network available");
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(msgIntent);
+            return;
+        }
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -229,5 +240,14 @@ public class BookService extends IntentService {
             getContentResolver().insert(AlexandriaContract.CategoryEntry.CONTENT_URI, values);
             values= new ContentValues();
         }
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
  }
