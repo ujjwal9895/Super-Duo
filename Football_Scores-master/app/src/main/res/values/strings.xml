@@ -52,4 +52,6 @@
     <string name="empty_score_string">No data available</string>
 
     <string name="widget_detail_title">Score Details</string>
+    <string name="unknown_league">Not known League Please report</string>
+    <string name="group_stage_matchday_6">Group Stages, Matchday : 6</string>
 </resources>
