@@ -49,4 +49,7 @@
 
     <string name="widget_team_default">TestTeam</string>
     <string name="widget_score_default">1 - 1</string>
+    <string name="empty_score_string">No data available</string>
+
+    <string name="widget_detail_title">Score Details</string>
 </resources>
