@@ -26,7 +26,7 @@
                 android:id="@+id/home_name"
                 android:gravity="center"
                 android:textSize="@dimen/TeamNames"
-                android:text="TestTeam"
+                android:text="@string/widget_team_default"
                 android:textColor="@color/blue01"
                 android:contentDescription="@string/desc_home"/>
 
@@ -38,7 +38,7 @@
                 android:id="@+id/away_name"
                 android:gravity="center"
                 android:textSize="@dimen/TeamNames"
-                android:text="TestTeam"
+                android:text="@string/widget_team_default"
                 android:textColor="@color/blue01"
                 android:contentDescription="@string/desc_away"/>
         </LinearLayout>
@@ -51,7 +51,7 @@
             android:id="@+id/score_textview"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="1 - 1"
+            android:text="@string/widget_score_default"
             android:textSize="@dimen/Score"
             android:textColor="@color/blue01"/>
     </LinearLayout>

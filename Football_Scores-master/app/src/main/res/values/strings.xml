@@ -46,4 +46,7 @@
     <string name="desc_home_logo">Home team logo</string>
     <string name="desc_away_logo">Away team logo</string>
     <string name="desc_about">About the app</string>
+
+    <string name="widget_team_default">TestTeam</string>
+    <string name="widget_score_default">1 - 1</string>
 </resources>
