@@ -27,7 +27,8 @@
                 android:gravity="center"
                 android:textSize="@dimen/TeamNames"
                 android:text="TestTeam"
-                android:textColor="@color/blue01" />
+                android:textColor="@color/blue01"
+                android:contentDescription="@string/desc_home"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -38,7 +39,8 @@
                 android:gravity="center"
                 android:textSize="@dimen/TeamNames"
                 android:text="TestTeam"
-                android:textColor="@color/blue01"/>
+                android:textColor="@color/blue01"
+                android:contentDescription="@string/desc_away"/>
         </LinearLayout>
 
 
